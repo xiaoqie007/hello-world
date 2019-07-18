@@ -114,5 +114,128 @@ this x is in the funcx:--> 9
 this x is out of funcx:--> 9
 ```
 
-**命名空间**
+- **命名空间**
+
+- **参数收集**(用args这种形式的参数接收多个值之外，还可以用*kargs的形式接收数值)
+
+```python
+>>> def func(x, *arg):
+	print(x) #输出参数x的值
+	result = x
+	print(arg) #输出通过*arg方式的值
+	for i in arg:
+		result += i
+	return result
+
+>>> print(func(1,2,3,4,5,6,7,8,9)) #赋给函数的参数个数不仅仅是两个
+1
+(2, 3, 4, 5, 6, 7, 8, 9)
+45
+>>> 
+```
+- 值1传给了参数x
+- 值2,3,4,5,6.7.8.9被塞入一个tuple里面，传给了arg
+
+**在各类编程语言中，常常会遇到以foo，bar，foobar等之类的命名**
+
+- **kargs 接收数值
+```python
+>>> def foo(**kargs):
+	print(kargs)
+
+	
+>>> foo(a= 1, b= 2, c= 3)
+{'a': 1, 'b': 2, 'c': 3}
+>>> 
+```
+- 如果用**kargs的形式收集值，会得到dict类型的数据，但是，需要在传值的时候说明“键”和“值”，因为在字典中是以键值对形式出现的。
+
+
+#### ***args** 和 ***kargs结合** 四个结合的情况
+```python
+>>> def foo(x, y, z, *args, **kargs):
+	print(x)
+	print(y)
+	print(z)
+	print(args)
+	print(kargs)
+	
+>>> foo('zhaozhao', '12', 'hello')
+zhaozhao
+12
+hello
+()
+{}
+
+>>> foo(1,2,3,4,5,6,7)
+1
+2
+3
+(4, 5, 6, 7)
+{}
+
+>>> foo(1,2,3,4,5,6,7, name= 'qiwsir')
+1
+2
+3
+(4, 5, 6, 7)
+{'name': 'qiwsir'}
+>>> 
+```
+
+
+#### 另外一种传值方式
+```
+>>> def add(x, y):
+	return (x+y)
+
+>>> add(2,3)
+5
+>>> bars = (2,3)
+>>> add(*bars)
+5
+先把要传的值放到元组中，赋值给一个变量bars，然后用add(*bars)的方式，把值传到函数内。这有点像前面收集参数的逆过程。注意的是，元组中元素的个数，要跟函数所要求的变量个数一致。
+```
+### 复习
+-python中函数的参数通过赋值的方式来传递引用对象。下面总结通过总结常见的函数参数定义方式，来理解参数传递的流程:
+- def foo(p1,p2,p3,...)
+```
+>>> def foo(z,x,y):
+	print('z+x+y=%d'%(x+y+z))
+	
+>>> foo(1,2,3)
+z+x+y=6
+>>> 
+```
+- def foo(p1=value1,p2=value2,...)
+```python
+>>> foo(z=1,x=2,y=3)
+z+x+y=6
+>>> def foo(z=1,x=2,y=3):
+	print('z+x+y=%d'%(x+y+z))
+	
+>>> foo(z=2,x=4,y=6)
+z+x+y=12
+>>> 
+```
+
+- def foo(*args)
+>这种方式适合于不确定参数个数的时候，在参数args前面加一个*，注意，仅一个哟。
+
+- def foo(**args)
+>这种方式跟上面的区别在于，必须接收类似arg=val形式的。
+
+```
+>>> def foo(**args):    #这种方式接收，以dictionary的形式接收数据对象
+...     print (args)
+...
+
+>>> foo(1,2,3)          #这样就报错了
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: foo() takes exactly 0 arguments (3 given)
+
+>>> foo(a=1,b=2,c=3)    #这样就可以了，因为有了键值对
+{'a': 1, 'c': 3, 'b': 2}
+```
 
