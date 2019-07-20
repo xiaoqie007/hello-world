@@ -150,3 +150,47 @@ AttributeError: 'Girl' object has no attribute 'height'
 
 - **必须将类实例化之后，才能通过实例调用该类的方法。调用的时候在方法后面要跟括号（括号中默认有self参数，但是不写出来。）**
 
+
+
+**静态方法和类方法**
+
+```python
+__metaclass__ = type
+
+class StaticMethod:
+    @staticmethod
+    def foo():
+        print('This is static method foo().')
+
+
+class ClassMethod:
+    @classmethod
+    def bar(cls):
+        print('This is class method bar().')
+        print("bar() is part of class:", cls.__name__)
+
+if __name__ == "__main__":
+    static_foo = StaticMethod()
+    static_foo.foo()
+    StaticMethod.foo()
+    print("**********")
+    class_bar = ClassMethod()
+    class_bar.bar()
+    ClassMethod.bar()
+
+
+#@staticmethod 表示下面的方法是静态方法
+#@classmethod 表示下面的方法是类方法
+```
+
+
+**静态方法和类方法   ????**
+
+已知，类的方法第一个参数必须是self，并且如果要调用类的方法，必须将通过类的实例，即方法绑定实例后才能由实例调用。如果不绑定，一般在继承关系的类之间，可以用super函数等方法调用。
+
+这里再介绍一种方法，这种方法的调用方式跟上述的都不同，这就是：静态方法和类方法
+先看静态方法，虽然名为静态方法，但也是方法，所以，依然用def语句来定义。需要注意的是文件名后面的括号内，没有self，这和前面定义的类中的方法是不同的，也正是因着这个不同，才给它另外取了一个名字叫做静态方法，否则不就“泯然众人矣”。如果没有self，那么也就无法访问实例变量、类和实例的属性了，因为它们都是借助self来传递数据的。
+
+在看类方法，同样也具有一般方法的特点，区别也在参数上。类方法的参数也没有self，但是必须有**cls这个参数**。在类方法中，能够方法类属性，但是不能访问实例属性（读者可以自行设计代码检验之）。
+
+简要明确两种方法。下面看调用方法。两种方法都可以通过实例调用，即绑定实例。也可以通过类来调用，即StaticMethod.foo()这样的形式，这也是区别一般方法的地方，一般方法必须用通过绑定实例调用。
