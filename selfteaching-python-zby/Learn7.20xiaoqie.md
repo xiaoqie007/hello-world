@@ -117,7 +117,53 @@ if __name__ == '__main__':
     p.code()
     #p.__python()
     ```
+```
 
-特殊方法(1)
+
+
+
+#### 特殊方法
+
 __dict__
-  
+
+
+__slots__
+
+
+首先声明，__slots__能够限制属性的定义，但是这不是它存在终极目标，它存在的终极目标更应该是一个在编程中非常重要的方面：优化内存使用。
+
+
+```python
+>>> class Spring(object):
+	__slots__ = ("tree", "flower")
+
+	
+>>> dir(Spring)
+['__class__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__slots__', '__str__', '__subclasshook__', 'flower', 'tree']
+>>> Spring.__slots__
+('tree', 'flower')
+>>> t = Spring()
+>>> t.__slots__
+('tree', 'flower')
+>>> Spring.tree = "liushu"
+>>> Spring.flower = "yueji"
+>>> t.tree = "guanyulan"
+Traceback (most recent call last):
+  File "<pyshell#9>", line 1, in <module>
+    t.tree = "guanyulan"
+AttributeError: 'Spring' object attribute 'tree' is read-only
+>>> t.tree
+'liushu'
+>>> t.flower
+'yueji'
+>>> t.flower = "yueji"
+Traceback (most recent call last):
+  File "<pyshell#12>", line 1, in <module>
+    t.flower = "yueji"
+AttributeError: 'Spring' object attribute 'flower' is read-only
+>>> Spring.flower
+'yueji'
+>>> 
+```
+看来__slots__已经把实例属性牢牢地管控了起来，但更本质是的是优化了内存。诚然，这种优化会在大量的实例时候显出效果。
+
