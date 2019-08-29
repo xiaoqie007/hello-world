@@ -38,3 +38,25 @@ In [6]:
 
 #基于NumPy的算法要比纯Python快10到100倍（甚至更快），并且使用的内存更少。
 
+
+
+- NumPy一元函数对ndarray中的数据执行元素级运算的函数
+
+np.abs(x)、np.fabs(x) ： 计算数组各元素的绝对值
+
+np.sqrt(x) ： 计算数组各元素的平方根
+
+np.square(x) ： 计算数组各元素的平方
+
+np.log(x) 、np.log10(x)、np.log2(x) ： 计算数组各元素的自然对数、10底对数和2底对数
+
+np.ceil(x) 、np.floor(x) ： 计算数组各元素的ceiling值或floor值
+ ———————————————— 
+np.rint(x) ： 计算数组各元素的四舍五入值
+np.modf(x) ： 将数组各元素的小数和整数部分以两个独立数组形式返回
+np.cos(x)、 np.cosh(x)、np.sin(x)、 np.sinh(x)、np.tan(x) 、np.tanh(x) ： 计算数组各元素的普通型和双曲型三角函数
+np.exp(x) ： 计算数组各元素的指数值
+np.sign(x) ： 计算数组各元素的符号值，1(+), 0, ‐1(‐)
+ ———————————————— 
+版权声明：本文为CSDN博主「brucewong0516」的原创文章，遵循CC 4.0 by-sa版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/brucewong0516/article/details/79186176
