@@ -23,3 +23,21 @@ GROUP BY game.id,game.mdate, game.team1, game.team2
 ORDER BY mdate,matchid,team1,team2
 
 ```
+
+补充
+```SQL
+CASE WHEN condition1 THEN value1 
+       WHEN condition2 THEN value2  
+       ELSE def_value 
+  END 
+
+例子：
+
+SELECT name, population
+      ,CASE WHEN population<1000000 
+            THEN 'small'
+            WHEN population<10000000 
+            THEN 'medium'
+            ELSE 'large'
+       END
+  FROM bbc
